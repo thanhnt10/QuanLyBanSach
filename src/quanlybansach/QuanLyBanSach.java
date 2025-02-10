@@ -14,8 +14,7 @@ public class QuanLyBanSach {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Hello thanh");
-        System.out.println("Hello thanh2");
+        
         
     }
     
