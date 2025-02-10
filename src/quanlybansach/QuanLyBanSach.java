@@ -15,6 +15,7 @@ public class QuanLyBanSach {
      */
     public static void main(String[] args) {
         System.out.println("Hello thanh");
+        System.out.println("Hello thanh");
         
     }
     
