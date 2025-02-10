@@ -31,6 +31,7 @@ public class QuanLyBanSach {
         
         System.out.println("hello hoanng");
         System.out.println("thanh da sua 1");
+        System.out.println("thanh da sua 2");
 
 
         
