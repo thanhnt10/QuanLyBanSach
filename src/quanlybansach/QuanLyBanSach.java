@@ -21,13 +21,6 @@ public class QuanLyBanSach {
 
         System.out.println("Hello thanh");
         
-        System.out.println("hello hoang");
-        
-        
-        
-
-        
-        
 
     }
     
