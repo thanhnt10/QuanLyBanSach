@@ -22,7 +22,7 @@ public class QuanLyBanSach {
         System.out.println("Hello thanh");
         
         System.out.println("hello hoanng");
-        
+        System.out.println("thanh 2");
 
         
         
