@@ -4,7 +4,9 @@
  */
 package Model;
 
-import java.util.Date;
+import java.sql.Date;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -13,7 +15,8 @@ import java.util.Date;
 public class PhieuGiamGia {
 
     public class Voucher {
-
+        @Getter
+        @Setter
         private int ID_voucher;
         private String tenKhuyenMai;
         private Date ngayBatDau;
@@ -26,9 +29,7 @@ public class PhieuGiamGia {
         private double mucGiamGiaToiDa;
 
         // Constructor
-        public Voucher(int ID_voucher, String tenKhuyenMai, Date ngayBatDau, Date ngayKetThuc, Date ngayTao,
-                String trangThai, double mucGiamGia, String dieuKienApDung, String hinhThucGiamGia,
-                double mucGiamGiaToiDa) {
+        public Voucher(int ID_voucher, String tenKhuyenMai, Date ngayBatDau, Date ngayKetThuc, Date ngayTao, String trangThai, double mucGiamGia, String dieuKienApDung, String hinhThucGiamGia, double mucGiamGiaToiDa) {
             this.ID_voucher = ID_voucher;
             this.tenKhuyenMai = tenKhuyenMai;
             this.ngayBatDau = ngayBatDau;
@@ -40,87 +41,6 @@ public class PhieuGiamGia {
             this.hinhThucGiamGia = hinhThucGiamGia;
             this.mucGiamGiaToiDa = mucGiamGiaToiDa;
         }
-
-        // Getters and Setters
-        public int getID_voucher() {
-            return ID_voucher;
-        }
-
-        public void setID_voucher(int ID_voucher) {
-            this.ID_voucher = ID_voucher;
-        }
-
-        public String getTenKhuyenMai() {
-            return tenKhuyenMai;
-        }
-
-        public void setTenKhuyenMai(String tenKhuyenMai) {
-            this.tenKhuyenMai = tenKhuyenMai;
-        }
-
-        public Date getNgayBatDau() {
-            return ngayBatDau;
-        }
-
-        public void setNgayBatDau(Date ngayBatDau) {
-            this.ngayBatDau = ngayBatDau;
-        }
-
-        public Date getNgayKetThuc() {
-            return ngayKetThuc;
-        }
-
-        public void setNgayKetThuc(Date ngayKetThuc) {
-            this.ngayKetThuc = ngayKetThuc;
-        }
-
-        public Date getNgayTao() {
-            return ngayTao;
-        }
-
-        public void setNgayTao(Date ngayTao) {
-            this.ngayTao = ngayTao;
-        }
-
-        public String getTrangThai() {
-            return trangThai;
-        }
-
-        public void setTrangThai(String trangThai) {
-            this.trangThai = trangThai;
-        }
-
-        public double getMucGiamGia() {
-            return mucGiamGia;
-        }
-
-        public void setMucGiamGia(double mucGiamGia) {
-            this.mucGiamGia = mucGiamGia;
-        }
-
-        public String getDieuKienApDung() {
-            return dieuKienApDung;
-        }
-
-        public void setDieuKienApDung(String dieuKienApDung) {
-            this.dieuKienApDung = dieuKienApDung;
-        }
-
-        public String getHinhThucGiamGia() {
-            return hinhThucGiamGia;
-        }
-
-        public void setHinhThucGiamGia(String hinhThucGiamGia) {
-            this.hinhThucGiamGia = hinhThucGiamGia;
-        }
-
-        public double getMucGiamGiaToiDa() {
-            return mucGiamGiaToiDa;
-        }
-
-        public void setMucGiamGiaToiDa(double mucGiamGiaToiDa) {
-            this.mucGiamGiaToiDa = mucGiamGiaToiDa;
-        }
+        
     }
-
 }
