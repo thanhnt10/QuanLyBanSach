@@ -10,9 +10,6 @@ package viewChucNangChinh;
  */
 public class ViewSanPham extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Trang_San_Pham
-     */
     public ViewSanPham() {
         initComponents();
     }
