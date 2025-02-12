@@ -4,17 +4,32 @@
  */
 package viewChucNangChinh;
 
+import Model.PhieuGiamGia;
+import Repository.PhieuGiamGiaRepo;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Hoang
  */
 public class ViewPhieuGiamGia extends javax.swing.JPanel {
-
+    private PhieuGiamGiaRepo repo1 = new PhieuGiamGiaRepo();
     /**
      * Creates new form ViewPhieuGiamGia
      */
     public ViewPhieuGiamGia() {
         initComponents();
+        
+    }
+    public void FillToTable(ArrayList<PhieuGiamGia> listPhieu){
+        DefaultTableModel model = (DefaultTableModel) tblPhieuGiamGia.getModel();
+        model.setRowCount(0);
+        for (PhieuGiamGia phieu : listPhieu) {
+            model.addRow(new Object[]{
+                    
+            });
+        }
     }
 
     /**
@@ -37,11 +52,9 @@ public class ViewPhieuGiamGia extends javax.swing.JPanel {
         jTextField4 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblPhieuGiamGia = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -67,16 +80,14 @@ public class ViewPhieuGiamGia extends javax.swing.JPanel {
 
         jLabel6.setText("Ngày kết thúc : ");
 
-        jLabel7.setText("Trạng thái : ");
-
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/PhieuGiamGia.png"))); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblPhieuGiamGia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã ", "Tên phiếu giảm giá", "Số lượng", "Ngày bắt đầu", "Ngày kết thúc", "Trạng thái"
+                "STT", "Mã gi?m giá", "Tên gi?m giá", "S? ti?n gi?m", "Ngày b?t d?u", "Ngày k?t thúc"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -87,14 +98,14 @@ public class ViewPhieuGiamGia extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
+        jScrollPane1.setViewportView(tblPhieuGiamGia);
+        if (tblPhieuGiamGia.getColumnModel().getColumnCount() > 0) {
+            tblPhieuGiamGia.getColumnModel().getColumn(0).setResizable(false);
+            tblPhieuGiamGia.getColumnModel().getColumn(1).setResizable(false);
+            tblPhieuGiamGia.getColumnModel().getColumn(2).setResizable(false);
+            tblPhieuGiamGia.getColumnModel().getColumn(3).setResizable(false);
+            tblPhieuGiamGia.getColumnModel().getColumn(4).setResizable(false);
+            tblPhieuGiamGia.getColumnModel().getColumn(5).setResizable(false);
         }
 
         jButton1.setText("Thêm ");
@@ -140,12 +151,10 @@ public class ViewPhieuGiamGia extends javax.swing.JPanel {
                                         .addGap(70, 70, 70)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel6)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel7))
+                                            .addComponent(jLabel5))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jTextField4)
-                                            .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                                             .addComponent(jTextField5)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jButton2)
@@ -159,12 +168,12 @@ public class ViewPhieuGiamGia extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(jButton1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField1, jTextField2, jTextField3});
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField4, jTextField5, jTextField6});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField4, jTextField5});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,9 +197,7 @@ public class ViewPhieuGiamGia extends javax.swing.JPanel {
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel8))
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -199,12 +206,12 @@ public class ViewPhieuGiamGia extends javax.swing.JPanel {
                     .addComponent(jButton3))
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addContainerGap(198, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextField1, jTextField2, jTextField3});
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextField4, jTextField5, jTextField6});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextField4, jTextField5});
 
     }// </editor-fold>//GEN-END:initComponents
 
@@ -231,15 +238,13 @@ public class ViewPhieuGiamGia extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTable tblPhieuGiamGia;
     // End of variables declaration//GEN-END:variables
 }
