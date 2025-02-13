@@ -8,12 +8,12 @@ package viewChucNangChinh;
  *
  * @author Admin
  */
-public class ViewNguoiDung extends javax.swing.JPanel {
+public class ViewKhachHang extends javax.swing.JPanel {
 
     /**
      * Creates new form ViewPhieuGiamGia
      */
-    public ViewNguoiDung() {
+    public ViewKhachHang() {
         initComponents();
     }
 
