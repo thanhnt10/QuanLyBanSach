@@ -4,23 +4,17 @@
  */
 package viewChucNangChinh;
 
-import Repository.NhanVienRepo;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author Hoang
  */
 public class DangNhap extends javax.swing.JFrame {
 
-    private NhanVienRepo nhanVienRepo;
-
     /**
      * Creates new form DangNhap
      */
     public DangNhap() {
         initComponents();
-        nhanVienRepo = new NhanVienRepo();
     }
 
     /**

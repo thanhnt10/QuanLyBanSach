@@ -223,7 +223,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="viewChucNangChinh.ViewNguoiDung" name="viewNguoiDung1">
+            <Component class="viewChucNangChinh.ViewKhachHang" name="viewNguoiDung1">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                   <CardConstraints cardName="cardNguoiDung"/>

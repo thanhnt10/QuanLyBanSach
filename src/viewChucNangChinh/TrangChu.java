@@ -42,7 +42,7 @@ public class TrangChu extends javax.swing.JFrame {
         btnViewHoaDon = new javax.swing.JButton();
         cards = new javax.swing.JPanel();
         viewBanHang1 = new viewChucNangChinh.ViewBanHang();
-        viewNguoiDung1 = new viewChucNangChinh.ViewNguoiDung();
+        viewNguoiDung1 = new viewChucNangChinh.ViewKhachHang();
         viewPhieuGiamGia2 = new viewChucNangChinh.ViewPhieuGiamGia();
         viewHoaDon2 = new viewChucNangChinh.ViewHoaDon();
         viewSanPham1 = new viewChucNangChinh.ViewSanPham();
@@ -275,7 +275,7 @@ public class TrangChu extends javax.swing.JFrame {
     private javax.swing.JLabel lblDangXuat;
     private viewChucNangChinh.ViewBanHang viewBanHang1;
     private viewChucNangChinh.ViewHoaDon viewHoaDon2;
-    private viewChucNangChinh.ViewNguoiDung viewNguoiDung1;
+    private viewChucNangChinh.ViewKhachHang viewNguoiDung1;
     private viewChucNangChinh.ViewPhieuGiamGia viewPhieuGiamGia2;
     private viewChucNangChinh.ViewSanPham viewSanPham1;
     // End of variables declaration//GEN-END:variables
