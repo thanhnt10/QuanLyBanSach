@@ -33,19 +33,21 @@ public class TrangChu extends javax.swing.JFrame {
         Menu = new javax.swing.JPanel();
         btnViewSanPham = new javax.swing.JButton();
         btnViewTrangChu = new javax.swing.JButton();
-        btnViewNhanVien = new javax.swing.JButton();
+        btnViewKhachHang = new javax.swing.JButton();
         btnViewPhieuGiamGia = new javax.swing.JButton();
         btnBanHang = new javax.swing.JButton();
         btnViewThongKe = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblDangXuat = new javax.swing.JLabel();
         btnViewHoaDon = new javax.swing.JButton();
+        btnViewNhanVien = new javax.swing.JButton();
         cards = new javax.swing.JPanel();
         viewBanHang1 = new viewChucNangChinh.ViewBanHang();
-        viewNguoiDung1 = new viewChucNangChinh.ViewNguoiDung();
+        viewNguoiDung1 = new viewChucNangChinh.ViewKhachHang();
         viewPhieuGiamGia2 = new viewChucNangChinh.ViewPhieuGiamGia();
         viewHoaDon2 = new viewChucNangChinh.ViewHoaDon();
         viewSanPham1 = new viewChucNangChinh.ViewSanPham();
+        viewNhanVien1 = new viewChucNangChinh.ViewNhanVien();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,11 +64,11 @@ public class TrangChu extends javax.swing.JFrame {
         btnViewTrangChu.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnViewTrangChu.setText("Trang Chủ");
 
-        btnViewNhanVien.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnViewNhanVien.setText("Người Dùng");
-        btnViewNhanVien.addActionListener(new java.awt.event.ActionListener() {
+        btnViewKhachHang.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnViewKhachHang.setText("Khách Hàng");
+        btnViewKhachHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewNhanVienActionPerformed(evt);
+                btnViewKhachHangActionPerformed(evt);
             }
         });
 
@@ -115,6 +117,14 @@ public class TrangChu extends javax.swing.JFrame {
             }
         });
 
+        btnViewNhanVien.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnViewNhanVien.setText("Nhân Viên");
+        btnViewNhanVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewNhanVienActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
         MenuLayout.setHorizontalGroup(
@@ -133,13 +143,14 @@ public class TrangChu extends javax.swing.JFrame {
                             .addComponent(btnViewHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnBanHang)
                             .addComponent(btnViewPhieuGiamGia)
-                            .addComponent(btnViewNhanVien)
+                            .addComponent(btnViewKhachHang)
                             .addComponent(btnViewSanPham)
-                            .addComponent(btnViewTrangChu))))
+                            .addComponent(btnViewTrangChu)
+                            .addComponent(btnViewNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        MenuLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBanHang, btnViewNhanVien, btnViewPhieuGiamGia, btnViewSanPham, btnViewThongKe, btnViewTrangChu});
+        MenuLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBanHang, btnViewKhachHang, btnViewPhieuGiamGia, btnViewSanPham, btnViewThongKe, btnViewTrangChu});
 
         MenuLayout.setVerticalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,7 +162,7 @@ public class TrangChu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnViewSanPham)
                 .addGap(18, 18, 18)
-                .addComponent(btnViewNhanVien)
+                .addComponent(btnViewKhachHang)
                 .addGap(18, 18, 18)
                 .addComponent(btnViewPhieuGiamGia)
                 .addGap(18, 18, 18)
@@ -160,9 +171,11 @@ public class TrangChu extends javax.swing.JFrame {
                 .addComponent(btnViewThongKe)
                 .addGap(18, 18, 18)
                 .addComponent(btnViewHoaDon)
+                .addGap(18, 18, 18)
+                .addComponent(btnViewNhanVien)
                 .addGap(167, 167, 167)
                 .addComponent(lblDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         jSplitPane2.setLeftComponent(Menu);
@@ -176,13 +189,26 @@ public class TrangChu extends javax.swing.JFrame {
         cards.add(viewHoaDon2, "cardHoaDon");
         cards.add(viewSanPham1, "cardSanPham");
 
+        javax.swing.GroupLayout viewNhanVien1Layout = new javax.swing.GroupLayout(viewNhanVien1);
+        viewNhanVien1.setLayout(viewNhanVien1Layout);
+        viewNhanVien1Layout.setHorizontalGroup(
+            viewNhanVien1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1183, Short.MAX_VALUE)
+        );
+        viewNhanVien1Layout.setVerticalGroup(
+            viewNhanVien1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 884, Short.MAX_VALUE)
+        );
+
+        cards.add(viewNhanVien1, "cardNhanVien");
+
         jSplitPane2.setRightComponent(cards);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1050, Short.MAX_VALUE)
+            .addComponent(jSplitPane2)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,9 +223,9 @@ public class TrangChu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnViewSanPhamActionPerformed
 
-    private void btnViewNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewNhanVienActionPerformed
+    private void btnViewKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewKhachHangActionPerformed
         cardLayout.show(cards,"cardNguoiDung");
-    }//GEN-LAST:event_btnViewNhanVienActionPerformed
+    }//GEN-LAST:event_btnViewKhachHangActionPerformed
 
     private void btnBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanHangActionPerformed
         cardLayout.show(cards,"cardBanHang");
@@ -224,6 +250,10 @@ public class TrangChu extends javax.swing.JFrame {
     private void btnViewHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewHoaDonActionPerformed
         cardLayout.show(cards,"cardHoaDon");
     }//GEN-LAST:event_btnViewHoaDonActionPerformed
+
+    private void btnViewNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewNhanVienActionPerformed
+        cardLayout.show(cards,"cardNhanVien");
+    }//GEN-LAST:event_btnViewNhanVienActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,6 +294,7 @@ public class TrangChu extends javax.swing.JFrame {
     private javax.swing.JPanel Menu;
     private javax.swing.JButton btnBanHang;
     private javax.swing.JButton btnViewHoaDon;
+    private javax.swing.JButton btnViewKhachHang;
     private javax.swing.JButton btnViewNhanVien;
     private javax.swing.JButton btnViewPhieuGiamGia;
     private javax.swing.JButton btnViewSanPham;
@@ -275,7 +306,8 @@ public class TrangChu extends javax.swing.JFrame {
     private javax.swing.JLabel lblDangXuat;
     private viewChucNangChinh.ViewBanHang viewBanHang1;
     private viewChucNangChinh.ViewHoaDon viewHoaDon2;
-    private viewChucNangChinh.ViewNguoiDung viewNguoiDung1;
+    private viewChucNangChinh.ViewKhachHang viewNguoiDung1;
+    private viewChucNangChinh.ViewNhanVien viewNhanVien1;
     private viewChucNangChinh.ViewPhieuGiamGia viewPhieuGiamGia2;
     private viewChucNangChinh.ViewSanPham viewSanPham1;
     // End of variables declaration//GEN-END:variables
