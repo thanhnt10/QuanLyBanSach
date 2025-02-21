@@ -1,58 +1,68 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
+import java.math.BigDecimal;
+import java.util.Date;
 
-import java.sql.Date;
-
-/**
- *
- * @author nguye
- */
 public class PhieuGiamGia {
-        private int ID_voucher;
-        private String tenKhuyenMai;
-        private Date ngayBatDau;
-        private Date ngayKetThuc;
-        private Date ngayTao;
-        private String trangThai;
-        private double mucGiamGia;
-        private String dieuKienApDung;
-        private String hinhThucGiamGia;
-        private double mucGiamGiaToiDa;
 
-        public PhieuGiamGia() {
+    private int id;                    // INT IDENTITY(1,1) PRIMARY KEY
+    private String maPhieuGiamGia;     // NVARCHAR(50) UNIQUE NOT NULL
+    private String tenPhieuGiamGia;    // NVARCHAR(255) NOT NULL
+    private int soLuong;               // INT NOT NULL CHECK (SoLuong >= 0)
+    private Date ngayBatDau;           // DATE
+    private Date ngayKetThuc;          // DATE
+    private BigDecimal soTienGiam;     // DECIMAL(18,2) NOT NULL CHECK (SoTienGiam >= 0)
+
+    // Constructor mặc định (không tham số)
+    public PhieuGiamGia() {
+    }
+
+    // Constructor đầy đủ tham số
+    public PhieuGiamGia(int id, String maPhieuGiamGia, String tenPhieuGiamGia, int soLuong,
+            Date ngayBatDau, Date ngayKetThuc, BigDecimal soTienGiam) {
+        this.id = id;
+        this.maPhieuGiamGia = maPhieuGiamGia;
+        this.tenPhieuGiamGia = tenPhieuGiamGia;
+        this.soLuong = soLuong;
+        this.ngayBatDau = ngayBatDau;
+        this.ngayKetThuc = ngayKetThuc;
+        this.soTienGiam = soTienGiam;
+    }
+
+    // Getter và Setter
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getMaPhieuGiamGia() {
+        return maPhieuGiamGia;
+    }
+
+    public void setMaPhieuGiamGia(String maPhieuGiamGia) {
+        this.maPhieuGiamGia = maPhieuGiamGia;
+    }
+
+    public String getTenPhieuGiamGia() {
+        return tenPhieuGiamGia;
+    }
+
+    public void setTenPhieuGiamGia(String tenPhieuGiamGia) {
+        this.tenPhieuGiamGia = tenPhieuGiamGia;
+    }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        if (soLuong >= 0) { // Kiểm tra CHECK (SoLuong >= 0)
+            this.soLuong = soLuong;
+        } else {
+            throw new IllegalArgumentException("Số lượng phải >= 0");
         }
-
-        // Constructor
-        public PhieuGiamGia(int ID_voucher, String tenKhuyenMai, Date ngayBatDau, Date ngayKetThuc, Date ngayTao, String trangThai, double mucGiamGia, String dieuKienApDung, String hinhThucGiamGia, double mucGiamGiaToiDa) {
-            this.ID_voucher = ID_voucher;
-            this.tenKhuyenMai = tenKhuyenMai;
-            this.ngayBatDau = ngayBatDau;
-            this.ngayKetThuc = ngayKetThuc;
-            this.ngayTao = ngayTao;
-            this.trangThai = trangThai;
-            this.mucGiamGia = mucGiamGia;
-            this.dieuKienApDung = dieuKienApDung;
-            this.hinhThucGiamGia = hinhThucGiamGia;
-            this.mucGiamGiaToiDa = mucGiamGiaToiDa;
-        }
-
-    public int getID_voucher() {
-        return ID_voucher;
-    }
-
-    public void setID_voucher(int ID_voucher) {
-        this.ID_voucher = ID_voucher;
-    }
-
-    public String getTenKhuyenMai() {
-        return tenKhuyenMai;
-    }
-
-    public void setTenKhuyenMai(String tenKhuyenMai) {
-        this.tenKhuyenMai = tenKhuyenMai;
     }
 
     public Date getNgayBatDau() {
@@ -71,53 +81,29 @@ public class PhieuGiamGia {
         this.ngayKetThuc = ngayKetThuc;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
+    public BigDecimal getSoTienGiam() {
+        return soTienGiam;
     }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    public void setSoTienGiam(BigDecimal soTienGiam) {
+        if (soTienGiam != null && soTienGiam.compareTo(BigDecimal.ZERO) >= 0) { // Kiểm tra CHECK (SoTienGiam >= 0)
+            this.soTienGiam = soTienGiam;
+        } else {
+            throw new IllegalArgumentException("Số tiền giảm phải >= 0");
+        }
     }
 
-    public String getTrangThai() {
-        return trangThai;
+    // Phương thức toString() để dễ debug hoặc hiển thị thông tin
+    @Override
+    public String toString() {
+        return "PhieuGiamGia{"
+                + "id=" + id
+                + ", maPhieuGiamGia='" + maPhieuGiamGia + '\''
+                + ", tenPhieuGiamGia='" + tenPhieuGiamGia + '\''
+                + ", soLuong=" + soLuong
+                + ", ngayBatDau=" + ngayBatDau
+                + ", ngayKetThuc=" + ngayKetThuc
+                + ", soTienGiam=" + soTienGiam
+                + '}';
     }
-
-    public void setTrangThai(String trangThai) {
-        this.trangThai = trangThai;
-    }
-
-    public double getMucGiamGia() {
-        return mucGiamGia;
-    }
-
-    public void setMucGiamGia(double mucGiamGia) {
-        this.mucGiamGia = mucGiamGia;
-    }
-
-    public String getDieuKienApDung() {
-        return dieuKienApDung;
-    }
-
-    public void setDieuKienApDung(String dieuKienApDung) {
-        this.dieuKienApDung = dieuKienApDung;
-    }
-
-    public String getHinhThucGiamGia() {
-        return hinhThucGiamGia;
-    }
-
-    public void setHinhThucGiamGia(String hinhThucGiamGia) {
-        this.hinhThucGiamGia = hinhThucGiamGia;
-    }
-
-    public double getMucGiamGiaToiDa() {
-        return mucGiamGiaToiDa;
-    }
-
-    public void setMucGiamGiaToiDa(double mucGiamGiaToiDa) {
-        this.mucGiamGiaToiDa = mucGiamGiaToiDa;
-    }
-
-    }
-
+}
