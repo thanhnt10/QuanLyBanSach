@@ -32,7 +32,6 @@ public class ViewKhachHang extends javax.swing.JPanel {
         initComponents();
         model = (DefaultTableModel) tblKhachHang.getModel();
         loadDataToTable(); // Tải dữ liệu khi khởi tạo
-        addButtonListeners();
     }
     private boolean isMaKhachHangExists(String maKhachHang) {
         List<KhachHang> list = repository.timKiemTheoMa(maKhachHang);
@@ -102,123 +101,7 @@ public class ViewKhachHang extends javax.swing.JPanel {
         txtSearchByMa1.setText("");
         btnSearchByTen.setText("");
         loadDataToTable();
-    }
-    private void addButtonListeners() {
-        btnThem.addActionListener(evt -> themKhachHang());
-        btnSua.addActionListener(evt -> suaKhachHang());
-        btnXoa.addActionListener(evt -> xoaKhachHang());
-        btnTimKiem.addActionListener(evt -> timKiemKhachHang());
-        btnLamMoi.addActionListener(evt -> lamMoiForm());
-    }   
-    private void timKiemKhachHang() {
-        String ma = txtSearchByMa1.getText().trim();
-        String ten = btnSearchByTen.getText().trim();
-        model.setRowCount(0);
-
-        if (!ma.isEmpty()) {
-            List<KhachHang> list = repository.timKiemTheoMa(ma);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            for (KhachHang kh : list) {
-                model.addRow(new Object[]{
-                    kh.getMaKhachHang(),
-                    sdf.format(kh.getNgaySinh()),
-                    kh.getTenKhachHang(),
-                    kh.getSdt(),
-                    kh.isGioiTinh() ? "Nam" : "Nữ",
-                    kh.getEmail()
-                });
-            }
-        } else if (!ten.isEmpty()) {
-            List<KhachHang> list = repository.timKiemTheoTen(ten);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            for (KhachHang kh : list) {
-                model.addRow(new Object[]{
-                    kh.getMaKhachHang(),
-                    sdf.format(kh.getNgaySinh()),
-                    kh.getTenKhachHang(),
-                    kh.getSdt(),
-                    kh.isGioiTinh() ? "Nam" : "Nữ",
-                    kh.getEmail()
-                });
-            }
-        } else {
-            loadDataToTable(); // Nếu không nhập gì thì hiển thị toàn bộ
-        }
-    }
-    private void xoaKhachHang() {
-        int selectedRow = tblKhachHang.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng để xóa!");
-            return;
-        }
-        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa khách hàng này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            String maKhachHang = (String) tblKhachHang.getValueAt(selectedRow, 0);
-            int id = getIdFromMa(maKhachHang);
-            if (repository.xoaKhachHang(id)) {
-                JOptionPane.showMessageDialog(this, "Xóa khách hàng thành công!");
-                loadDataToTable();
-                lamMoiForm();
-            } else {
-                JOptionPane.showMessageDialog(this, "Xóa khách hàng thất bại!");
-            }
-        }
-    }
-    private void suaKhachHang() {
-        int selectedRow = tblKhachHang.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng để sửa!");
-            return; 
-        }
-        try {
-            KhachHang kh = getFormData();
-            String maKhachHangMoi = kh.getMaKhachHang();
-            String maKhachHangCu = (String) tblKhachHang.getValueAt(selectedRow, 0);
-
-            // Nếu mã mới khác mã cũ, kiểm tra tính duy nhất
-            if (!maKhachHangMoi.equals(maKhachHangCu) && isMaKhachHangExists(maKhachHangMoi)) {
-                JOptionPane.showMessageDialog(this, "Mã khách hàng mới đã tồn tại! Vui lòng nhập mã khác.");
-                return;
-            }
-
-            kh.setId(getIdFromMa(maKhachHangCu)); // Sử dụng mã cũ để lấy ID
-            if (repository.suaKhachHang(kh)) {
-                JOptionPane.showMessageDialog(this, "Sửa khách hàng thành công!");
-                loadDataToTable();
-                lamMoiForm();
-            } else {
-                JOptionPane.showMessageDialog(this, "Sửa khách hàng thất bại!");
-            }
-        } catch (ParseException e) {
-            JOptionPane.showMessageDialog(this, "Ngày sinh phải có định dạng yyyy-MM-dd!");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
-        }
-    }
-    private void themKhachHang() {
-        try {
-            KhachHang kh = getFormData();
-            String maKhachHang = kh.getMaKhachHang();
-
-            // Kiểm tra mã khách hàng đã tồn tại chưa
-            if (isMaKhachHangExists(maKhachHang)) {
-                JOptionPane.showMessageDialog(this, "Mã khách hàng đã tồn tại! Vui lòng nhập mã khác.");
-                return;
-            }   
-
-            if (repository.themKhachHang(kh)) {
-                JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công!");
-                loadDataToTable();
-                lamMoiForm();
-            } else {
-                JOptionPane.showMessageDialog(this, "Thêm khách hàng thất bại!");
-            }
-        } catch (ParseException e) {
-            JOptionPane.showMessageDialog(this, "Ngày sinh phải có định dạng yyyy-MM-dd!");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
-        }
-    }
+    }  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -279,7 +162,7 @@ public class ViewKhachHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã ", "Năm sinh", "Tên khách hàng", "Số điện thoại", "Giới tính", "Email"
+                "Mã ", "Tên khách hàng", "Năm sinh", "Số điện thoại", "Giới tính", "Email"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -386,23 +269,121 @@ public class ViewKhachHang extends javax.swing.JPanel {
     }//GEN-LAST:event_rdoNuActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = tblKhachHang.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng để sửa!");
+            return; 
+        }
+        try {
+            KhachHang kh = getFormData();
+            String maKhachHangMoi = kh.getMaKhachHang();
+            String maKhachHangCu = (String) tblKhachHang.getValueAt(selectedRow, 0);
+
+            // Nếu mã mới khác mã cũ, kiểm tra tính duy nhất
+            if (!maKhachHangMoi.equals(maKhachHangCu) && isMaKhachHangExists(maKhachHangMoi)) {
+                JOptionPane.showMessageDialog(this, "Mã khách hàng mới đã tồn tại! Vui lòng nhập mã khác.");
+                return;
+            }
+
+            kh.setId(getIdFromMa(maKhachHangCu)); // Sử dụng mã cũ để lấy ID
+            if (repository.suaKhachHang(kh)) {
+                JOptionPane.showMessageDialog(this, "Sửa khách hàng thành công!");
+                loadDataToTable();
+                lamMoiForm();
+            } else {
+                JOptionPane.showMessageDialog(this, "Sửa khách hàng thất bại!");
+            }
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(this, "Ngày sinh phải có định dạng yyyy-MM-dd!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
+        try {
+            KhachHang kh = getFormData();
+            String maKhachHang = kh.getMaKhachHang();
+
+            // Kiểm tra mã khách hàng đã tồn tại chưa
+            if (isMaKhachHangExists(maKhachHang)) {
+                JOptionPane.showMessageDialog(this, "Mã khách hàng đã tồn tại! Vui lòng nhập mã khác.");
+                return;
+            }   
+
+            if (repository.themKhachHang(kh)) {
+                JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công!");
+                loadDataToTable();
+                lamMoiForm();
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm khách hàng thất bại!");
+            }
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(this, "Ngày sinh phải có định dạng yyyy-MM-dd!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = tblKhachHang.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng để xóa!");
+            return;
+        }
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa khách hàng này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            String maKhachHang = (String) tblKhachHang.getValueAt(selectedRow, 0);
+            int id = getIdFromMa(maKhachHang);
+            if (repository.xoaKhachHang(id)) {
+                JOptionPane.showMessageDialog(this, "Xóa khách hàng thành công!");
+                loadDataToTable();
+                lamMoiForm();
+            } else {
+                JOptionPane.showMessageDialog(this, "Xóa khách hàng thất bại!");
+            }
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
-        // TODO add your handling code here:
+        lamMoiForm();
+        loadDataToTable();
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-        // TODO add your handling code here:
+        String ma = txtSearchByMa1.getText().trim();
+        String ten = btnSearchByTen.getText().trim();
+        model.setRowCount(0);
+
+        if (!ma.isEmpty()) {
+            List<KhachHang> list = repository.timKiemTheoMa(ma);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            for (KhachHang kh : list) {
+                model.addRow(new Object[]{
+                    kh.getMaKhachHang(),
+                    sdf.format(kh.getNgaySinh()),
+                    kh.getTenKhachHang(),
+                    kh.getSdt(),
+                    kh.isGioiTinh() ? "Nam" : "Nữ",
+                    kh.getEmail()
+                });
+            }
+        } else if (!ten.isEmpty()) {
+            List<KhachHang> list = repository.timKiemTheoTen(ten);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            for (KhachHang kh : list) {
+                model.addRow(new Object[]{
+                    kh.getMaKhachHang(),
+                    sdf.format(kh.getNgaySinh()),
+                    kh.getTenKhachHang(),
+                    kh.getSdt(),
+                    kh.isGioiTinh() ? "Nam" : "Nữ",
+                    kh.getEmail()
+                });
+            }
+        } else {
+            loadDataToTable(); // Nếu không nhập gì thì hiển thị toàn bộ
+        }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked

@@ -78,7 +78,7 @@ public class ViewPhieuGiamGia extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setText("S? ti?n gi?m ");
+        jLabel4.setText("Số tiền giảm");
 
         jLabel5.setText("Ngày bắt đầu : ");
 
@@ -91,7 +91,7 @@ public class ViewPhieuGiamGia extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Mã gi?m giá", "Tên gi?m giá", "S? lu?ng", "S? ti?n gi?m", "Ngày b?t d?u", "Ngày k?t thúc"
+                "STT", "Mã giảm giá ", "Tên giảm giá", "Số lượng", "Số tiền giảm", "Ngày bắt đầu", "Ngày kết thúc"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -144,16 +144,16 @@ public class ViewPhieuGiamGia extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setText("Mã gi?m giá");
+        jLabel7.setText("Mã giảm giá ");
 
-        btnSearch.setText("Tìm ki?m");
+        btnSearch.setText("Tìm kiếm");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
             }
         });
 
-        jLabel9.setText("S? lu?ng");
+        jLabel9.setText("Số lượng");
 
         txtSoLuong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
