@@ -44,8 +44,8 @@ public class ViewKhachHang extends javax.swing.JPanel {
         for (KhachHang kh : list) {
             model.addRow(new Object[]{
                 kh.getMaKhachHang(),
-                sdf.format(kh.getNgaySinh()),
                 kh.getTenKhachHang(),
+                sdf.format(kh.getNgaySinh()),
                 kh.getSdt(),
                 kh.isGioiTinh() ? "Nam" : "Nữ",
                 kh.getEmail()
@@ -78,8 +78,8 @@ public class ViewKhachHang extends javax.swing.JPanel {
         int selectedRow = tblKhachHang.getSelectedRow();
         if (selectedRow >= 0) {
             txtMa.setText((String) tblKhachHang.getValueAt(selectedRow, 0));
-            txtNamSinh.setText((String) tblKhachHang.getValueAt(selectedRow, 1));
-            txtTenKhachHang.setText((String) tblKhachHang.getValueAt(selectedRow, 2));
+            txtTenKhachHang.setText((String) tblKhachHang.getValueAt(selectedRow, 1));
+            txtNamSinh.setText((String) tblKhachHang.getValueAt(selectedRow, 2));
             txtSDT.setText((String) tblKhachHang.getValueAt(selectedRow, 3));
             String gioiTinh = (String) tblKhachHang.getValueAt(selectedRow, 4);
             if (gioiTinh.equals("Nam")) {
