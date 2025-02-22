@@ -33,9 +33,14 @@ public class ViewHoaDon extends javax.swing.JPanel {
 
     public ViewHoaDon() {
         initComponents();
-        hoaDonRepo = new HoaDonRepo();
+        hoaDonRepo = new HoaDonRepo();  // Khởi tạo repository để lấy dữ liệu
         chiTietHoaDonRepo = new ChiTietHoaDonRepo();  // Repository cho chi tiết hóa đơn
         loadHoaDonList();
+        HoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HoaDonMouseClicked(evt);  // Gọi phương thức xử lý sự kiện khi click vào bảng
+            }
+        });
     }
 
     private void loadHoaDonList() {
@@ -309,130 +314,132 @@ public class ViewHoaDon extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String maHoaDon = MaHoaDon.getText().trim();
-        String maNhanVien = MaNhanVien.getText().trim();
-        String maKhachHang = MaKhachHang.getText().trim();
+    String maNhanVien = MaNhanVien.getText().trim();
+    String maKhachHang = MaKhachHang.getText().trim();
 
-// Lấy giá trị ngày từ JDateChooser
-        java.util.Date tuNgay = ThoiGianTu.getDate();
-        java.util.Date denNgay = ThoiGianDen.getDate();
+    // Lấy giá trị ngày từ JDateChooser
+    java.util.Date tuNgay = ThoiGianTu.getDate();
+    java.util.Date denNgay = ThoiGianDen.getDate();
 
-        DefaultTableModel model = (DefaultTableModel) HoaDon.getModel();
-        model.setRowCount(0);
+    DefaultTableModel model = (DefaultTableModel) HoaDon.getModel();
+    model.setRowCount(0);
 
-        ArrayList<HoaDon> hoaDons = hoaDonRepo.getAllHoaDon();
+    ArrayList<HoaDon> hoaDons = hoaDonRepo.getAllHoaDon();
 
-        for (HoaDon hoaDon : hoaDons) {
-            boolean matches = true;
+    for (HoaDon hoaDon : hoaDons) {
+        boolean matches = true;
 
-            // Kiểm tra mã hóa đơn
-            if (!maHoaDon.isEmpty() && !hoaDon.getMaHoaDon().contains(maHoaDon)) {
+        // Kiểm tra mã hóa đơn
+        if (!maHoaDon.isEmpty() && !hoaDon.getMaHoaDon().contains(maHoaDon)) {
+            matches = false;
+        }
+
+        // Kiểm tra mã nhân viên
+        if (!maNhanVien.isEmpty() && !hoaDon.getMaNhanVien().contains(maNhanVien)) {
+            matches = false;
+        }
+
+        // Kiểm tra mã khách hàng
+        if (!maKhachHang.isEmpty() && !hoaDon.getMaKhachHang().contains(maKhachHang)) {
+            matches = false;
+        }
+
+        // Kiểm tra thời gian từ và đến
+        if (tuNgay != null && denNgay != null) {
+            java.util.Date ngayTaoHoaDon = hoaDon.getNgayTao(); // Giả sử getNgayTao() trả về kiểu java.util.Date
+            if (ngayTaoHoaDon.before(tuNgay) || ngayTaoHoaDon.after(denNgay)) {
                 matches = false;
-            }
-
-            // Kiểm tra mã nhân viên
-            if (!maNhanVien.isEmpty() && !hoaDon.getMaNhanVien().contains(maNhanVien)) {
-                matches = false;
-            }
-
-            // Kiểm tra mã khách hàng
-            if (!maKhachHang.isEmpty() && !hoaDon.getMaKhachHang().contains(maKhachHang)) {
-                matches = false;
-            }
-
-            // Kiểm tra thời gian từ và đến
-            if (tuNgay != null && denNgay != null) {
-                java.util.Date ngayTaoHoaDon = hoaDon.getNgayTao(); // Giả sử getNgayTao() trả về kiểu java.util.Date
-                if (ngayTaoHoaDon.before(tuNgay) || ngayTaoHoaDon.after(denNgay)) {
-                    matches = false;
-                }
-            }
-// hekiiii
-            // Nếu tất cả điều kiện khớp, thêm vào bảng
-            if (matches) {
-                model.addRow(new Object[]{
-                    hoaDon.getMaHoaDon(),
-                    hoaDon.getMaKhachHang(),
-                    hoaDon.getMaNhanVien(),
-                    hoaDon.getMaPhieuGiamGia(),
-                    hoaDon.getNgayTao(),
-                    hoaDon.getTongTien()
-                });
             }
         }
+
+        // Nếu tất cả điều kiện khớp, thêm vào bảng
+        if (matches) {
+            model.addRow(new Object[]{
+                hoaDon.getMaHoaDon(),
+                hoaDon.getMaKhachHang(),
+                hoaDon.getMaNhanVien(),
+                hoaDon.getMaPhieuGiamGia(),
+                hoaDon.getNgayTao(),
+                hoaDon.getTongTien(),
+                hoaDon.getSoTienGiam(),  // Thêm dòng này để hiển thị số tiền giảm
+                hoaDon.getThanhTien()    // Thêm dòng này để hiển thị thành tiền
+            });
+        }
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void XuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XuatActionPerformed
         int option = JOptionPane.showConfirmDialog(
-                this,
-                "Bạn có muốn in hóa đơn không?",
-                "Xác nhận in hóa đơn",
-                JOptionPane.YES_NO_OPTION
-        );
+            this,
+            "Bạn có muốn in hóa đơn không?",
+            "Xác nhận in hóa đơn",
+            JOptionPane.YES_NO_OPTION
+    );
 
-        if (option == JOptionPane.YES_OPTION) {
-            Document document = new Document();
-            try {
-                String userHome = System.getProperty("user.home");
-                String downloadsPath = userHome + "/Downloads/HoaDon.pdf";
+    if (option == JOptionPane.YES_OPTION) {
+        Document document = new Document();
+        try {
+            String userHome = System.getProperty("user.home");
+            String downloadsPath = userHome + "/Downloads/HoaDon.pdf";
 
-                PdfWriter.getInstance(document, new FileOutputStream(downloadsPath));
-                document.open();
+            PdfWriter.getInstance(document, new FileOutputStream(downloadsPath));
+            document.open();
 
-                Font font = FontFactory.getFont(FontFactory.HELVETICA, 12);
+            Font font = FontFactory.getFont(FontFactory.HELVETICA, 12);
 
-                document.add(new Paragraph("HOA DON BAN HANG", font));
-                document.add(new Paragraph("Ngay: " + new java.util.Date(), font));
-                document.add(new Paragraph(" "));
+            document.add(new Paragraph("HOA DON BAN HANG", font));
+            document.add(new Paragraph("Ngay: " + new java.util.Date(), font));
+            document.add(new Paragraph(" "));
 
-                PdfPTable table = new PdfPTable(8);
-                table.setWidthPercentage(100);
+            PdfPTable table = new PdfPTable(8);
+            table.setWidthPercentage(100);
 
-                table.addCell(new Paragraph("Ma hoa don", font));
-                table.addCell(new Paragraph("Ma khach hang", font));
-                table.addCell(new Paragraph("Ma nhan vien", font));
-                table.addCell(new Paragraph("Ma giam gia", font));
-                table.addCell(new Paragraph("Ngay tao", font));
-                table.addCell(new Paragraph("Tong tien", font));
-                table.addCell(new Paragraph("Giam gia", font));
-                table.addCell(new Paragraph("Thanh tien", font));
+            table.addCell(new Paragraph("Ma hoa don", font));
+            table.addCell(new Paragraph("Ma khach hang", font));
+            table.addCell(new Paragraph("Ma nhan vien", font));
+            table.addCell(new Paragraph("Ma giam gia", font));
+            table.addCell(new Paragraph("Ngay tao", font));
+            table.addCell(new Paragraph("Tong tien", font));
+            table.addCell(new Paragraph("Giam gia", font));
+            table.addCell(new Paragraph("Thanh tien", font));
 
-                DefaultTableModel model = (DefaultTableModel) HoaDon.getModel();
-                int rowCount = model.getRowCount();
+            DefaultTableModel model = (DefaultTableModel) HoaDon.getModel();
+            int rowCount = model.getRowCount();
 
-                for (int i = 0; i < rowCount; i++) {
-                    String maHoaDon = model.getValueAt(i, 0) != null ? model.getValueAt(i, 0).toString() : "";
-                    String maKhachHang = model.getValueAt(i, 1) != null ? model.getValueAt(i, 1).toString() : "";
-                    String maNhanVien = model.getValueAt(i, 2) != null ? model.getValueAt(i, 2).toString() : "";
-                    String maGiamGia = model.getValueAt(i, 3) != null ? model.getValueAt(i, 3).toString() : "";
-                    String ngayTao = model.getValueAt(i, 4) != null ? model.getValueAt(i, 4).toString() : "";
-                    String tongTien = model.getValueAt(i, 5) != null ? model.getValueAt(i, 5).toString() : "";
-                    String giamGia = model.getValueAt(i, 6) != null ? model.getValueAt(i, 6).toString() : "";
-                    String thanhTien = model.getValueAt(i, 7) != null ? model.getValueAt(i, 7).toString() : "";
+            for (int i = 0; i < rowCount; i++) {
+                String maHoaDon = model.getValueAt(i, 0) != null ? model.getValueAt(i, 0).toString() : "";
+                String maKhachHang = model.getValueAt(i, 1) != null ? model.getValueAt(i, 1).toString() : "";
+                String maNhanVien = model.getValueAt(i, 2) != null ? model.getValueAt(i, 2).toString() : "";
+                String maGiamGia = model.getValueAt(i, 3) != null ? model.getValueAt(i, 3).toString() : "";
+                String ngayTao = model.getValueAt(i, 4) != null ? model.getValueAt(i, 4).toString() : "";
+                String tongTien = model.getValueAt(i, 5) != null ? model.getValueAt(i, 5).toString() : "";
+                String giamGia = model.getValueAt(i, 6) != null ? model.getValueAt(i, 6).toString() : "";
+                String thanhTien = model.getValueAt(i, 7) != null ? model.getValueAt(i, 7).toString() : "";
 
-                    table.addCell(new Paragraph(maHoaDon, font));
-                    table.addCell(new Paragraph(maKhachHang, font));
-                    table.addCell(new Paragraph(maNhanVien, font));
-                    table.addCell(new Paragraph(maGiamGia, font));
-                    table.addCell(new Paragraph(ngayTao, font));
-                    table.addCell(new Paragraph(tongTien, font));
-                    table.addCell(new Paragraph(giamGia, font));
-                    table.addCell(new Paragraph(thanhTien, font));
-                }
-
-                document.add(table);
-                document.close();
-
-                JOptionPane.showMessageDialog(this, "Xuất hóa đơn thành công: " + downloadsPath);
-            } catch (DocumentException | IOException e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(this, "Lỗi khi xuất hóa đơn: " + e.getMessage());
-            } catch (Exception e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(this, "Lỗi không xác định: " + e.getMessage());
+                table.addCell(new Paragraph(maHoaDon, font));
+                table.addCell(new Paragraph(maKhachHang, font));
+                table.addCell(new Paragraph(maNhanVien, font));
+                table.addCell(new Paragraph(maGiamGia, font));
+                table.addCell(new Paragraph(ngayTao, font));
+                table.addCell(new Paragraph(tongTien, font));
+                table.addCell(new Paragraph(giamGia, font));
+                table.addCell(new Paragraph(thanhTien, font));
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Bạn đã hủy in hóa đơn.");
+
+            document.add(table);
+            document.close();
+
+            JOptionPane.showMessageDialog(this, "Xuất hóa đơn thành công: " + downloadsPath);
+        } catch (DocumentException | IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi xuất hóa đơn: " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi không xác định: " + e.getMessage());
         }
+    } else {
+        JOptionPane.showMessageDialog(this, "Bạn đã hủy in hóa đơn.");
+    }
 
     }//GEN-LAST:event_XuatActionPerformed
 
