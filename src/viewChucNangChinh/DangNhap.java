@@ -155,12 +155,13 @@ public class DangNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTaiKhoanActionPerformed
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
-        String taiKhoan = txtTaiKhoan.getText();
-        String matKhau = txtMatKhau.getText();
-        if (nhanVienRepo.dangNhap(taiKhoan, matKhau)) {
-            this.dispose();
-            new TrangChu().setVisible(true);
-        }
+//        String taiKhoan = txtTaiKhoan.getText();
+//        String matKhau = txtMatKhau.getText();
+//        if (nhanVienRepo.dangNhap(taiKhoan, matKhau)) {
+//            this.dispose();
+//            new TrangChu().setVisible(true);
+//        }
+ new TrangChu().setVisible(true);
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed

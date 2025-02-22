@@ -5,6 +5,9 @@
 package viewChucNangChinh;
 
 import java.awt.CardLayout;
+import java.awt.GridBagLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
@@ -252,7 +255,14 @@ public class TrangChu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnViewHoaDonActionPerformed
 
     private void btnViewNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewNhanVienActionPerformed
+        cards.add(new ViewNhanVien(), "cardNhanVien");
         cardLayout.show(cards,"cardNhanVien");
+      
+        
+
+
+
+
     }//GEN-LAST:event_btnViewNhanVienActionPerformed
 
     /**
